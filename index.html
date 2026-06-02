@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>СТР - Свобода твоей речи</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- ЭКРАН АВТОРИЗАЦИИИ -->
+    <div id="auth-screen" class="auth-overlay">
+        <div class="auth-box">
+            <h2>СТР</h2>
+            <p class="auth-subtitle">Свобода твоей речи</p>
+            
+            <div id="auth-errors" class="error-msg"></div>
+
+            <input type="text" id="auth-login" placeholder="Логин (никнейм)">
+            <input type="password" id="auth-password" placeholder="Пароль">
+            
+            <div class="auth-buttons">
+                <button id="btn-signin">Войти</button>
+                <button id="btn-signup" class="btn-secondary">Регистрация</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ВЕРХНЯЯ ПАНЕЛЬ СТР -->
+    <header class="top-panel">
+        <div class="header-container">
+            <div class="logo">СТР <span class="tagline">— Свобода твоей речи</span></div>
+            <div class="search-bar">
+                <input type="text" placeholder="Поиск по платформе...">
+            </div>
+            <div class="user-mini" id="logout-zone" title="Нажмите, чтобы выйти">
+                <span id="nav-user-name">Гость</span>
+                <span id="nav-user-badge" class="dev-badge mini" style="display: none;">DEV</span>
+                <img id="nav-user-avatar" class="avatar-mini" src="" alt="">
+            </div>
+        </div>
+    </header>
+
+    <!-- ОСНОВНОЙ КОНТЕНТ -->
+    <div class="main-container">
+        <!-- Меню навигации -->
+        <aside class="sidebar">
+            <nav>
+                <a href="#" class="menu-item active" data-tab="profile">Мой Профиль</a>
+                <a href="#" class="menu-item" data-tab="messages">Диалоги</a>
+                <a href="#" class="menu-item" data-tab="settings">Настройки СТР</a>
+            </nav>
+        </aside>
+
+        <!-- Контент -->
+        <main class="content">
+            
+            <!-- ПРОФИЛЬ (Универсальный: свой или чужой) -->
+            <section id="tab-profile" class="tab-content active">
+                <div class="profile-card">
+                    <img id="profile-avatar-img" class="profile-avatar" src="" alt="Аватар">
+                    <div class="profile-info">
+                        <div class="profile-title-zone">
+                            <h2 id="profile-name">Пользователь</h2>
+                            <span id="profile-dev-badge" class="dev-badge" style="display: none;">DEV</span>
+                        </div>
+                        <p id="profile-status" class="status-text">Установить статус</p>
+                        <hr>
+                        <div class="info-rows">
+                            <div class="info-row"><span>Статус СТР:</span> <b style="color: var(--str-brand);">Активирован</b></div>
+                            <div class="info-row"><span>День рождения:</span> <span id="profile-birthday" class="dynamic-info">Не указан</span></div>
+                            <div class="info-row"><span>Город:</span> <span id="profile-city" class="dynamic-info">Не указан</span></div>
+                            <div class="info-row"><span>О себе:</span> <span id="profile-about" class="dynamic-info">Не указано</span></div>
+                        </div>
+                        
+                        <!-- Кнопки действий при просмотре чужого профиля -->
+                        <div id="profile-actions" class="profile-actions-zone"></div>
+                    </div>
+                </div>
+
+                <!-- Создание публикации -->
+                <div class="card create-post">
+                    <input type="text" id="post-input" placeholder="Поделись мыслями...">
+                    <button id="post-button">Опубликовать</button>
+                </div>
+
+                <!-- Лента мыслей -->
+                <div id="posts-feed"></div>
+            </section>
+
+            <!-- СООБЩЕНИЯ (ИНТЕРАКТИВНЫЕ ДИАЛОГИ) -->
+            <section id="tab-messages" class="tab-content">
+                <div class="card messages-box">
+                    <!-- Список пользователей, с кем можно поболтать -->
+                    <div class="dialogs-list" id="dialogs-list"></div>
+                    
+                    <!-- Область переписки -->
+                    <div class="chat-area">
+                        <div class="chat-messages" id="chat-messages">
+                            <div class="msg system">Выберите диалог слева для начала общения</div>
+                        </div>
+                        <div class="chat-input-zone">
+                            <input type="text" id="chat-input" placeholder="Напишите сообщение...">
+                            <button id="chat-send">Отправить</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- НАСТРОЙКИ СТР -->
+            <section id="tab-settings" class="tab-content">
+                <div class="card settings-card">
+                    <h3>Настройки аккаунта</h3>
+                    
+                    <div class="setting-group">
+                        <label>Ваша аватарка:</label>
+                        <input type="file" id="avatar-upload" accept="image/*">
+                        <p class="hint">Загрузите картинку с устройства</p>
+                    </div>
+
+                    <div class="setting-group">
+                        <label>Изменить статус:</label>
+                        <input type="text" id="settings-status-input" placeholder="Новый статус...">
+                    </div>
+
+                    <div class="setting-group">
+                        <label>День рождения:</label>
+                        <input type="text" id="settings-birthday-input" placeholder="Например: 2 июня">
+                    </div>
+
+                    <div class="setting-group">
+                        <label>Город:</label>
+                        <input type="text" id="settings-city-input" placeholder="Ваш город...">
+                    </div>
+
+                    <div class="setting-group">
+                        <label>О себе:</label>
+                        <input type="text" id="settings-about-input" placeholder="Интересы, технологии...">
+                    </div>
+
+                    <!-- ПОДТВЕРЖДЕНИЕ РАЗРАБОТЧИКА -->
+                    <div class="setting-group dev-verification-zone">
+                        <label style="color: var(--str-brand); font-weight: bold;">Код разработчика СТР:</label>
+                        <input type="password" id="settings-dev-code" placeholder="Введите секретное слово для верификации...">
+                        <p class="hint">Дает уникальный статус и бейдж [DEV] на платформе</p>
+                    </div>
+                    
+                    <button id="save-settings-button">Сохранить все изменения</button>
+                </div>
+            </section>
+
+        </main>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
