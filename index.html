@@ -8,7 +8,6 @@
 </head>
 <body>
 
-    <!-- ЭКРАН АВТОРИЗАЦИИИ -->
     <div id="auth-screen" class="auth-overlay">
         <div class="auth-box">
             <h2>СТР</h2>
@@ -26,7 +25,6 @@
         </div>
     </div>
 
-    <!-- ВЕРХНЯЯ ПАНЕЛЬ СТР -->
     <header class="top-panel">
         <div class="header-container">
             <div class="logo">СТР <span class="tagline">— Свобода твоей речи</span></div>
@@ -41,9 +39,7 @@
         </div>
     </header>
 
-    <!-- ОСНОВНОЙ КОНТЕНТ -->
     <div class="main-container">
-        <!-- Меню навигации -->
         <aside class="sidebar">
             <nav>
                 <a href="#" class="menu-item active" data-tab="profile">Мой Профиль</a>
@@ -52,10 +48,8 @@
             </nav>
         </aside>
 
-        <!-- Контент -->
         <main class="content">
             
-            <!-- ПРОФИЛЬ (Универсальный: свой или чужой) -->
             <section id="tab-profile" class="tab-content active">
                 <div class="profile-card">
                     <img id="profile-avatar-img" class="profile-avatar" src="" alt="Аватар">
@@ -73,28 +67,22 @@
                             <div class="info-row"><span>О себе:</span> <span id="profile-about" class="dynamic-info">Не указано</span></div>
                         </div>
                         
-                        <!-- Кнопки действий при просмотре чужого профиля -->
                         <div id="profile-actions" class="profile-actions-zone"></div>
                     </div>
                 </div>
 
-                <!-- Создание публикации -->
                 <div class="card create-post">
                     <input type="text" id="post-input" placeholder="Поделись мыслями...">
                     <button id="post-button">Опубликовать</button>
                 </div>
 
-                <!-- Лента мыслей -->
                 <div id="posts-feed"></div>
             </section>
 
-            <!-- СООБЩЕНИЯ (ИНТЕРАКТИВНЫЕ ДИАЛОГИ) -->
             <section id="tab-messages" class="tab-content">
                 <div class="card messages-box">
-                    <!-- Список пользователей, с кем можно поболтать -->
                     <div class="dialogs-list" id="dialogs-list"></div>
                     
-                    <!-- Область переписки -->
                     <div class="chat-area">
                         <div class="chat-messages" id="chat-messages">
                             <div class="msg system">Выберите диалог слева для начала общения</div>
@@ -107,7 +95,6 @@
                 </div>
             </section>
 
-            <!-- НАСТРОЙКИ СТР -->
             <section id="tab-settings" class="tab-content">
                 <div class="card settings-card">
                     <h3>Настройки аккаунта</h3>
@@ -138,7 +125,6 @@
                         <input type="text" id="settings-about-input" placeholder="Интересы, технологии...">
                     </div>
 
-                    <!-- ПОДТВЕРЖДЕНИЕ РАЗРАБОТЧИКА -->
                     <div class="setting-group dev-verification-zone">
                         <label style="color: var(--str-brand); font-weight: bold;">Код разработчика СТР:</label>
                         <input type="password" id="settings-dev-code" placeholder="Введите секретное слово для верификации...">
@@ -151,6 +137,10 @@
 
         </main>
     </div>
+
+    <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-database-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-storage-compat.js"></script>
 
     <script src="script.js"></script>
 </body>
