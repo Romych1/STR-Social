@@ -3,90 +3,196 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>СТР - Свобода твоей речи</title>
+    <title>СТР — Свобода твоей речи</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
+    <!-- ЭКРАН АВТОРИЗАЦИИ -->
     <div id="auth-screen" class="auth-overlay">
         <div class="auth-box">
-            <h2>СТР</h2>
+            <h1 class="auth-logo">СТР</h1>
             <p class="auth-subtitle">Свобода твоей речи</p>
             
             <div id="auth-errors" class="error-msg"></div>
 
-            <input type="text" id="auth-login" placeholder="Логин (никнейм)">
+            <input type="text" id="auth-login" placeholder="Телефон или никнейм">
             <input type="password" id="auth-password" placeholder="Пароль">
             
             <div class="auth-buttons">
                 <button id="btn-signin">Войти</button>
-                <button id="btn-signup" class="btn-secondary">Регистрация</button>
+                <button id="btn-signup" class="btn-secondary">Зарегистрироваться</button>
             </div>
         </div>
     </div>
 
-    <header class="top-panel">
+    <!-- ВЕРХНЯЯ ШАПКА -->
+    <header class="str-header">
         <div class="header-container">
-            <div class="logo">СТР <span class="tagline">— Свобода твоей речи</span></div>
-            <div class="search-bar">
-                <input type="text" placeholder="Поиск по платформе...">
+            <div class="logo-zone">
+                <span class="logo-text">СТР</span>
             </div>
-            <div class="user-mini" id="logout-zone" title="Нажмите, чтобы выйти">
+            <div class="search-zone">
+                <input type="text" id="global-search" placeholder="Поиск людей по никнейму">
+            </div>
+            <div class="header-profile" id="logout-zone" title="Выйти из аккаунта">
                 <span id="nav-user-name">Гость</span>
-                <span id="nav-user-badge" class="dev-badge mini" style="display: none;">DEV</span>
-                <img id="nav-user-avatar" class="avatar-mini" src="" alt="">
+                <img id="nav-user-avatar" class="avatar-micro" src="" alt="">
             </div>
         </div>
     </header>
 
-    <div class="main-container">
-        <aside class="sidebar">
-            <nav>
-                <a href="#" class="menu-item active" data-tab="profile">Мой Профиль</a>
-                <a href="#" class="menu-item" data-tab="messages">Диалоги</a>
-                <a href="#" class="menu-item" data-tab="settings">Настройки СТР</a>
+    <!-- ОСНОВНОЙ КОНТЕНТ -->
+    <div class="str-main-layout">
+        
+        <!-- ЛЕВОЕ МЕНЮ (ПК) -->
+        <aside class="str-sidebar">
+            <nav class="sidebar-nav">
+                <a href="#" class="menu-item active" data-tab="feed">Лента</a>
+                <a href="#" class="menu-item" data-tab="profile">Мой профиль</a>
+                <a href="#" class="menu-item" data-tab="messages">Мессенджер</a>
+                <a href="#" class="menu-item" data-tab="notifications">
+                    Уведомления <span id="notify-count-badge" class="badge-count" style="display:none;">0</span>
+                </a>
             </nav>
         </aside>
 
-        <main class="content">
+        <!-- ЦЕНТРАЛЬНЫЙ БЛОК -->
+        <main class="str-content">
             
-            <section id="tab-profile" class="tab-content active">
-                <div class="profile-card">
-                    <img id="profile-avatar-img" class="profile-avatar" src="" alt="Аватар">
-                    <div class="profile-info">
-                        <div class="profile-title-zone">
-                            <h2 id="profile-name">Пользователь</h2>
-                            <span id="profile-dev-badge" class="dev-badge" style="display: none;">DEV</span>
-                        </div>
-                        <p id="profile-status" class="status-text">Установить статус</p>
-                        <hr>
-                        <div class="info-rows">
-                            <div class="info-row"><span>Статус СТР:</span> <b style="color: var(--str-brand);">Активирован</b></div>
-                            <div class="info-row"><span>День рождения:</span> <span id="profile-birthday" class="dynamic-info">Не указан</span></div>
-                            <div class="info-row"><span>Город:</span> <span id="profile-city" class="dynamic-info">Не указан</span></div>
-                            <div class="info-row"><span>О себе:</span> <span id="profile-about" class="dynamic-info">Не указано</span></div>
-                        </div>
-                        
-                        <div id="profile-actions" class="profile-actions-zone"></div>
-                    </div>
-                </div>
-
-                <div class="card create-post">
-                    <input type="text" id="post-input" placeholder="Поделись мыслями...">
+            <!-- ВКЛАДКА: ЛЕНТА (ГЛАВНАЯ СТРАНИЦА) -->
+            <section id="tab-feed" class="tab-content active">
+                <div class="str-card create-post-card">
+                    <input type="text" id="post-input" placeholder="Что у вас нового?">
                     <button id="post-button">Опубликовать</button>
                 </div>
-
                 <div id="posts-feed"></div>
             </section>
 
-            <section id="tab-messages" class="tab-content">
-                <div class="card messages-box">
-                    <div class="dialogs-list" id="dialogs-list"></div>
+            <!-- ВКЛАДКА: МОЙ ПРОФИЛЬ + НАСТРОЙКИ -->
+            <section id="tab-profile" class="tab-content">
+                <div class="str-profile-grid">
+                    <div class="str-card avatar-card">
+                        <img id="my-profile-avatar-img" src="" alt="Аватар">
+                    </div>
                     
-                    <div class="chat-area">
-                        <div class="chat-messages" id="chat-messages">
-                            <div class="msg system">Выберите диалог слева для начала общения</div>
+                    <div class="str-card info-card">
+                        <div class="profile-header-line">
+                            <h2 id="my-profile-name">Загрузка...</h2>
+                            <div id="my-profile-badges-zone" class="badges-wrapper"></div>
                         </div>
+                        <p id="my-profile-status" class="str-status-text"></p>
+                        
+                        <div class="str-info-table">
+                            <div class="info-row"><span class="label">Город:</span> <span id="my-profile-city" class="val"></span></div>
+                            <div class="info-row"><span class="label">День рождения:</span> <span id="my-profile-birthday" class="val"></span></div>
+                            <div class="info-row"><span class="label">О себе:</span> <span id="my-profile-about" class="val"></span></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Блок списка друзей -->
+                <div class="str-card friends-card-list">
+                    <h3>Мои друзья</h3>
+                    <div id="my-friends-grid" class="friends-mini-flex"></div>
+                </div>
+
+                <!-- Настройки -->
+                <div class="str-card settings-card">
+                    <h3>Редактировать профиль</h3>
+                    <div class="input-grid-2">
+                        <div class="input-group">
+                            <label>Сменить аватарку</label>
+                            <input type="file" id="avatar-upload" accept="image/*">
+                        </div>
+                        <div class="input-group">
+                            <label>Статус</label>
+                            <input type="text" id="settings-status-input">
+                        </div>
+                        <div class="input-group">
+                            <label>Город</label>
+                            <input type="text" id="settings-city-input">
+                        </div>
+                        <div class="input-group">
+                            <label>День рождения</label>
+                            <input type="text" id="settings-birthday-input">
+                        </div>
+                    </div>
+                    <div class="input-group">
+                        <label>О себе</label>
+                        <textarea id="settings-about-input" rows="2"></textarea>
+                    </div>
+                    <div class="input-group">
+                        <label>Код разработчика СТР (DEV)</label>
+                        <input type="password" id="settings-dev-code" placeholder="Введите код для активации панели">
+                    </div>
+                    <button id="save-settings-button" class="str-btn">Сохранить изменения</button>
+                    
+                    <!-- Подача заявки на Опытного -->
+                    <div class="verification-user-zone" id="user-verify-section">
+                        <h4 class="sub-section-title">Статус верификации разработчика</h4>
+                        <button id="btn-request-verify" class="str-btn btn-bordered">Подать заявление на "Опытный"</button>
+                        <p id="verify-request-status" class="req-status-text"></p>
+                    </div>
+
+                    <!-- Панель управления создателя -->
+                    <div class="dev-admin-panel" id="dev-admin-section" style="display: none;">
+                        <h3 class="dev-title">Панель управления DEV</h3>
+                        <div class="input-group">
+                            <label>Цвет надписи DEV:</label>
+                            <input type="color" id="dev-badge-color-picker" value="#00f5d4">
+                            <button id="btn-save-badge-color" class="str-btn mini-btn">Применить цвет</button>
+                        </div>
+                        
+                        <h4>Заявления на ранг "Опытный":</h4>
+                        <div id="dev-requests-list" class="dev-list-box"></div>
+
+                        <h4>Назначить второго разработчика (Черная галочка):</h4>
+                        <div class="dev-assign-box">
+                            <input type="text" id="input-second-dev-name" placeholder="Никнейм пользователя">
+                            <button id="btn-grant-second-dev" class="str-btn mini-btn">Выдать статус</button>
+                        </div>
+
+                        <h4>Жалобы пользователей:</h4>
+                        <div id="dev-reports-list" class="dev-list-box"></div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ВКЛАДКА: ПРОСМОТР ЧУЖОГО ПРОФИЛЯ -->
+            <section id="tab-view-profile" class="tab-content">
+                <div class="str-profile-grid">
+                    <div class="str-card avatar-card">
+                        <img id="view-avatar-img" src="" alt="">
+                        <div id="view-profile-actions" class="profile-actions-vertical"></div>
+                    </div>
+                    <div class="str-card info-card">
+                        <div class="profile-header-line">
+                            <h2 id="view-name"></h2>
+                            <div id="view-badges-zone" class="badges-wrapper"></div>
+                        </div>
+                        <p id="view-status" class="str-status-text"></p>
+                        <div class="str-info-table">
+                            <div class="info-row"><span class="label">Город:</span> <span id="view-city" class="val"></span></div>
+                            <div class="info-row"><span class="label">День рождения:</span> <span id="view-birthday" class="val"></span></div>
+                            <div class="info-row"><span class="label">О себе:</span> <span id="view-about" class="val"></span></div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="str-card friends-card-list">
+                    <h3>Друзья пользователя</h3>
+                    <div id="view-friends-grid" class="friends-mini-flex"></div>
+                </div>
+            </section>
+
+            <!-- ВКЛАДКА: МЕССЕНДЖЕР -->
+            <section id="tab-messages" class="tab-content">
+                <div class="str-card messenger-box">
+                    <div class="dialogs-list" id="dialogs-list"></div>
+                    <div class="chat-area">
+                        <div class="chat-header" id="chat-header-title">Выберите диалог</div>
+                        <div class="chat-messages" id="chat-messages"></div>
                         <div class="chat-input-zone">
                             <input type="text" id="chat-input" placeholder="Напишите сообщение...">
                             <button id="chat-send">Отправить</button>
@@ -95,53 +201,31 @@
                 </div>
             </section>
 
-            <section id="tab-settings" class="tab-content">
-                <div class="card settings-card">
-                    <h3>Настройки аккаунта</h3>
-                    
-                    <div class="setting-group">
-                        <label>Ваша аватарка:</label>
-                        <input type="file" id="avatar-upload" accept="image/*">
-                        <p class="hint">Загрузите картинку с устройства</p>
+            <!-- ВКЛАДКА: УВЕДОМЛЕНИЯ -->
+            <section id="tab-notifications" class="tab-content">
+                <div class="str-card">
+                    <div class="notifications-header">
+                        <h3>Ваши уведомления</h3>
+                        <button id="btn-clear-notifications" class="str-btn mini-btn btn-bordered">Очистить все</button>
                     </div>
-
-                    <div class="setting-group">
-                        <label>Изменить статус:</label>
-                        <input type="text" id="settings-status-input" placeholder="Новый статус...">
-                    </div>
-
-                    <div class="setting-group">
-                        <label>День рождения:</label>
-                        <input type="text" id="settings-birthday-input" placeholder="Например: 2 июня">
-                    </div>
-
-                    <div class="setting-group">
-                        <label>Город:</label>
-                        <input type="text" id="settings-city-input" placeholder="Ваш город...">
-                    </div>
-
-                    <div class="setting-group">
-                        <label>О себе:</label>
-                        <input type="text" id="settings-about-input" placeholder="Интересы, технологии...">
-                    </div>
-
-                    <div class="setting-group dev-verification-zone">
-                        <label style="color: var(--str-brand); font-weight: bold;">Код разработчика СТР:</label>
-                        <input type="password" id="settings-dev-code" placeholder="Введите секретное слово для верификации...">
-                        <p class="hint">Дает уникальный статус и бейдж [DEV] на платформе</p>
-                    </div>
-                    
-                    <button id="save-settings-button">Сохранить все изменения</button>
+                    <div id="notifications-list" class="notifications-list-container"></div>
                 </div>
             </section>
 
         </main>
     </div>
 
-    <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-database-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-storage-compat.js"></script>
+    <!-- НИЖНЯЯ НАВИГАЦИЯ ДЛЯ МОБИЛЬНЫХ -->
+    <div class="str-bottom-nav">
+        <a href="#" class="nav-item active" data-tab="feed">Лента</a>
+        <a href="#" class="nav-item" data-tab="profile">Профиль</a>
+        <a href="#" class="nav-item" data-tab="messages">Чаты</a>
+        <a href="#" class="nav-item" data-tab="notifications">Уведомления <span id="notify-count-mob" class="mob-badge"></span></a>
+    </div>
 
+    <!-- FIREBASE SDK -->
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
     <script src="script.js"></script>
 </body>
 </html>
